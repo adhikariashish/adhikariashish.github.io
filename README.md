@@ -1,70 +1,95 @@
-# Getting Started with Create React App
+<!--
+  This README is designed for use as your GitHub Pages profile.
+  Simply add it as `README.md` in the root of your repository,
+  then enable GitHub Pages (branch “main” / folder “root”).
+-->
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Ashish Adhikari
 
-## Available Scripts
+**Data Scientist | Financial Analyst | Researcher**  
+Houston, TX • ashish.adhikari29@outlook.com • [LinkedIn](https://linkedin.com/in/ashishadhikarii)
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 👋 About Me
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+I’m a Master of Engineering candidate in Data Science at the University of Houston (’26), with a business background and 3+ years’ experience in financial data analysis and auditing. I build data-driven solutions—dashboards, ML models, ETL pipelines—to drive strategic decision-making and process optimization in finance, healthcare, and education sectors.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## ⚙️ Technical Skills
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Languages & Tools:** Python · SQL · Java · Git · Jupyter · Tableau · Excel  
+- **Libraries & Frameworks:** pandas · NumPy · scikit-learn · Matplotlib · Plotly · Streamlit  
+- **Databases & Cloud:** MySQL · SQLite · Pinecone · AWS S3 · Hugging Face Transformers  
+- **Methodologies:** EDA · Feature Engineering · Machine Learning · Deep Learning · Statistical Modeling · RAG Chatbots
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🛠️ Projects
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Real-Time IoT Streaming Analytics Dashboard  
+Streamlit & SQLite dashboard with KPI cards, interactive line/pie/bar charts, real-time data ingestion, and alert system.  
+🔗 [GitHub Repo](https://github.com/ashishadhikari/real-time-iot-analytics-dashboard)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Credit-Card Fraud Detection (Deep Learning)  
+Built and compared CNN and Random Forest models on transaction data; achieved 98% recall on fraud class.  
+🔗 [Project Notebook](https://github.com/ashishadhikari/credit-risk-ml-pipeline)
 
-### `npm run eject`
+### Payroll System with Intelligent Tax-Reduction  
+Full-stack web app (React, Flask, PostgreSQL) to generate payslips and suggest optimized tax planning routes.  
+🔗 [Live Demo](https://ashishadhikari.github.io/payroll-system)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🏢 Experience
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**Research Assistant / Data Analyst**  
+University of Houston, TX  
+_Sept 2024 – Present_  
+- Designed and automated evaluation reports for 200+ faculty courses using Python and Excel.  
+- Built SQL databases and ETL workflows; improved data retrieval time by 40%.  
+- Collaborated with cross-functional teams to tailor analytics dashboards.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+**Financial Data & Systems Analyst**  
+Variant Consulting Group, Kathmandu, NP  
+_Sept 2021 – Jun 2024_  
+- Performed statistical analyses and ratio reporting to guide C-suite decisions.  
+- Spearheaded accounting-software implementation, training 15+ finance staff.  
+- Ensured regulatory compliance through monthly internal audits.
 
-## Learn More
+**Audit Manager**  
+N Amatya & Co., Kathmandu, NP  
+_Sept 2013 – Jan 2018_  
+- Led statutory and tax audits for 10+ clients, managing teams of 4–6 auditors.  
+- Identified process gaps, reducing audit exceptions by 25%.  
+- Authored audit reports with actionable recommendations.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🎓 Education
 
-### Code Splitting
+**M.Eng. in Data Science**  
+University of Houston, TX (Aug 2024 – May 2026)  
+_Key Courses:_ Machine Learning · AI · Probability & Statistics · Database Management
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+**BSc (Hons) Computing (Software Engineering)**  
+NAMI / University of Northampton, UK (Aug 2018 – Sept 2021)  
+– Dissertation: Payroll System with Intelligent Tax Suggestions  
+– Major Project: Deep Learning for Fraud Detection
 
-### Analyzing the Bundle Size
+**MBS & BBS in Business Studies**  
+Tribhuwan University, Nepal (2011 – 2016)  
+– Theses on bank liquidity & profitability analyses
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+## 📫 Let’s Connect
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- 📧 ashish.adhikari29@outlook.com  
+- 🔗 [LinkedIn](https://linkedin.com/in/ashishadhikarii)  
+- 🐙 [GitHub](https://github.com/ashishadhikari)  
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+*Crafted with passion for data 🔍 and finance 💹.*  
