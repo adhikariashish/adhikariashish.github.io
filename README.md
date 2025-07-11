@@ -30,7 +30,7 @@ I’m a Master of Engineering candidate in Data Science at the University of Hou
 
 ### Real-Time IoT Streaming Analytics Dashboard  
 Streamlit & SQLite dashboard with KPI cards, interactive line/pie/bar charts, real-time data ingestion, and alert system.  
-🔗 [GitHub Repo](https://github.com/ashishadhikari/real-time-iot-analytics-dashboard)
+🔗 [GitHub Repo](https://github.com/ashishadhikari/Real-Time-IoT-Analytics-Dashboard-MQTT-Streamlit-SQLite)
 
 ### Credit-Card Fraud Detection (Deep Learning)  
 Built and compared CNN and Random Forest models on transaction data; achieved 98% recall on fraud class.  
