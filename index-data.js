@@ -5,6 +5,7 @@ window.INDEX_DATA = {
       domain: "FinTech | PINNs",
       tech: "PDE-constrained pricing | PyTorch | Streamlit",
       cat: "fintech",
+      github: "https://github.com/adhikariashish/hybrid-black-scholes-option-pricing-pinn",
       details: [
         "Built a physics-informed neural network for Black-Scholes option pricing with PDE, terminal, and boundary constraints in the loss.",
         "Used float64 precision, strike-focused collocation sampling, and periodic resampling to improve numerical stability.",
@@ -16,6 +17,7 @@ window.INDEX_DATA = {
       domain: "Energy | Forecasting",
       tech: "Transformer + constraints | 24h uncertainty",
       cat: "energy",
+      github: "https://github.com/adhikariashish/Physics-Constrained-Probabilistic-Load-Forecasting",
       details: [
         "Developed a 24-hour ahead probabilistic demand forecasting pipeline for grid operations.",
         "Compared LSTM, Transformer, and physics-constrained Transformer models with uncertainty intervals.",
@@ -27,6 +29,7 @@ window.INDEX_DATA = {
       domain: "FinTech | Credit",
       tech: "IFRS 9 framing | explainability | model risk",
       cat: "fintech",
+      github: "https://github.com/adhikariashish/credit-risk-ml-pipeline-Xgboost-fairlearn",
       details: [
         "Designed an explainable credit risk workflow aligned to IFRS 9 use cases.",
         "Combined gradient boosting models with explainability and calibration checks for auditability.",
@@ -38,6 +41,7 @@ window.INDEX_DATA = {
       domain: "Computer Vision | Satellite",
       tech: "Siamese UNet++ | Mamba fusion | DefAlign",
       cat: "cv",
+      github: "https://github.com/adhikariashish/hybrid-fusion-change-detection",
       details: [
         "Implemented a hybrid Siamese architecture for binary change detection in temporal satellite imagery.",
         "Combined cross-attention, Mamba-based fusion, and optional deformable alignment for robustness to spatial shifts.",
@@ -49,6 +53,7 @@ window.INDEX_DATA = {
       domain: "IoT | Streaming Analytics",
       tech: "MQTT | SQLite | Plotly | Streamlit",
       cat: "iot",
+      github: "https://github.com/adhikariashish/Real-Time-IoT-Analytics-Dashboard-MQTT-Streamlit-SQLite",
       details: [
         "Built a real-time sensor analytics dashboard with MQTT ingestion, SQLite storage, and Streamlit views.",
         "Tracked temperature, humidity, and CO2 metrics with KPI panels and trend charts.",
@@ -60,6 +65,7 @@ window.INDEX_DATA = {
       domain: "Enterprise AI | RAG",
       tech: "Citation-grounded QA | FastAPI | Chroma",
       cat: "rag",
+      github: "https://github.com/adhikariashish/enterprise-rag-assistant",
       details: [
         "Created a retrieval-first RAG assistant for document-grounded enterprise Q&A.",
         "Implemented deterministic no-answer behavior, distance-based retrieval validation, and citation controls.",
@@ -71,6 +77,7 @@ window.INDEX_DATA = {
       domain: "FinTech | Cashflow Intelligence",
       tech: "Forecasting | Explainability | Decision Support",
       cat: "fintech",
+      github: "https://github.com/adhikariashish/cashflow-intelligence.git",
       details: [
         "Built a cashflow intelligence system for forward-looking liquidity planning and executive decision support.",
         "Combined scenario-based forecasting with feature-level explanations to highlight key drivers of cash movement.",

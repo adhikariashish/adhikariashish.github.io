@@ -3,6 +3,6 @@
 # Not required by current index deployment
 *.md
 *.pdf
+!Ashish_Adhikari_Resume.pdf
 main.py
-portfolio_complete.html
 styles.css
