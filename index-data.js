@@ -65,6 +65,17 @@ window.INDEX_DATA = {
         "Implemented deterministic no-answer behavior, distance-based retrieval validation, and citation controls.",
         "Shipped streaming responses and a modular configuration-driven architecture for deployment."
       ]
+    },
+    {
+      name: "Cashflow Intelligence",
+      domain: "FinTech | Cashflow Intelligence",
+      tech: "Forecasting | Explainability | Decision Support",
+      cat: "fintech",
+      details: [
+        "Built a cashflow intelligence system for forward-looking liquidity planning and executive decision support.",
+        "Combined scenario-based forecasting with feature-level explanations to highlight key drivers of cash movement.",
+        "Designed outputs for finance operations, including risk flags and short-horizon action guidance."
+      ]
     }
   ]
 };

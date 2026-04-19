@@ -571,6 +571,43 @@ nav {
   background: #ede7da;
   border-top: 1px solid rgba(180,160,110,0.15);
 }
+.edu-strip-modern.minimal {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.edu-strip-modern.minimal .edu-card {
+  padding: 18px 20px;
+  border-right: 1px solid rgba(180,160,110,0.15);
+  border-bottom: none;
+}
+.edu-strip-modern.minimal .edu-card:last-child {
+  border-right: none;
+}
+.edu-strip-modern.minimal .edu-label,
+.edu-strip-modern.minimal .edu-degree,
+.edu-strip-modern.minimal .edu-inst,
+.edu-strip-modern.minimal .edu-year {
+  margin: 0;
+}
+.edu-strip-modern.minimal .edu-degree {
+  font-size: 14px;
+  line-height: 1.25;
+  margin-top: 6px;
+}
+.edu-strip-modern.minimal .edu-inst {
+  font-size: 11.5px;
+  margin-top: 5px;
+}
+.edu-strip-modern.minimal .edu-year {
+  margin-top: 7px;
+}
+.edu-strip-modern.minimal .edu-mini {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(180,160,110,0.2);
+  font-size: 10.5px;
+  line-height: 1.45;
+  color: #7a7060;
+}
 .edu-card {
   padding: 28px 32px;
   background: #ede7da;
@@ -678,12 +715,98 @@ nav {
 .filter-btn:hover { border-color: rgba(200,168,74,0.4); color: #7a6040; background: rgba(200,168,74,0.06); }
 .filter-btn.active { background: #1a1610; color: #f8f4ee; border-color: #1a1610; }
 
+.project-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 44px 20px;
+}
+.project-nav-btn {
+  font-family: 'Fragment Mono', monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8a7a58;
+  border: 1px solid rgba(180,160,110,0.35);
+  border-radius: 999px;
+  background: rgba(248,244,238,0.7);
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.project-nav-btn:hover:not(:disabled) {
+  color: #1a1610;
+  border-color: rgba(200,168,74,0.55);
+  background: rgba(200,168,74,0.09);
+}
+.project-nav-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.project-counter {
+  min-width: 92px;
+  text-align: center;
+  font-family: 'Fragment Mono', monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #9a8a68;
+}
+.project-tag {
+  font-family: 'Fraunces', serif;
+  font-size: 12px;
+  font-style: italic;
+  color: #8a7a58;
+  max-width: 260px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .proj-grid {
   display: grid;
   grid-template-columns: repeat(2,1fr);
   gap: 1px;
   background: rgba(180,160,110,0.12);
   border-top: 1px solid rgba(180,160,110,0.12);
+}
+.proj-grid.compact-mode {
+  display: block;
+  background: transparent;
+  border-top: none;
+  padding: 0 44px 10px;
+}
+.proj-grid.compact-mode .card {
+  display: none;
+  margin: 0 auto;
+  max-width: 980px;
+  border: 1px solid rgba(180,160,110,0.18);
+  border-radius: 14px;
+  box-shadow: 0 14px 36px rgba(71,52,25,0.1);
+}
+.proj-grid.compact-mode .card.is-active {
+  display: flex;
+  animation: projectReveal 420ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.proj-grid.compact-mode .card.wide {
+  grid-template-columns: 1fr 1fr;
+}
+.proj-grid.compact-mode .card.wide.is-active {
+  display: grid;
+}
+.proj-grid.compact-mode .card-body {
+  margin-bottom: 14px;
+}
+@keyframes projectReveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 .card {
   background: #f8f4ee;
@@ -815,6 +938,23 @@ nav {
   transition: color 0.2s;
 }
 .proj-bar-r:hover { color: #6a5a30; }
+
+@media (max-width: 980px) {
+  .project-nav {
+    padding: 14px 22px 16px;
+    justify-content: space-between;
+  }
+  .project-tag {
+    max-width: 140px;
+  }
+  .proj-grid.compact-mode {
+    padding: 0 16px 8px;
+  }
+  .proj-grid.compact-mode .card.wide {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+}
 
 
 /* ═══════════════════════════════════════
@@ -1210,6 +1350,22 @@ body.modal-open {
     <a href="#skills">Skills</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
+    <!--
+    <div class="card" data-cat="fintech">
+      <div class="card-top"><div class="card-domain">FinTech · Cashflow Intelligence</div><div class="card-num">07</div></div>
+      <div class="card-name">Cashflow Intelligence</div>
+      <div class="card-org">Forecasting · Explainability · Decision Support</div>
+      <div class="card-rule"></div>
+      <div class="card-body">
+        <div><div class="case-label">Problem</div><div class="case-text">Finance teams need <strong>forward-looking cash visibility</strong> with explanations they can trust in executive planning cycles.</div></div>
+        <div><div class="case-label">Approach</div><div class="case-text">Built a cashflow intelligence workflow combining scenario-driven forecasting, feature-level explanations, and operational KPIs.</div></div>
+        <div><div class="case-label">Outcome</div><div class="case-text">Delivered a planning-ready view of expected cash movement, key risk drivers, and actions for short-term optimization.</div></div>
+      </div>
+      <div class="card-skills"><span class="skill-pill">Cashflow Forecasting</span><span class="skill-pill">Scenario Analysis</span><span class="skill-pill">Explainability</span><span class="skill-pill">Finance Analytics</span></div>
+      <div class="card-foot"><div class="card-year">2026</div><a href="#" class="card-link">GitHub <span class="card-link-arr">↗</span></a></div>
+    </div>
+
+    -->
   </div>
   <div class="nav-right">
     <div class="nav-dot"></div>
@@ -1412,7 +1568,7 @@ body.modal-open {
       <div class="edu-year">Actively exploring</div>
     </div>
   </div>
-  <div class="edu-strip-modern">
+  <div class="edu-strip-modern" style="display:none;">
     <div class="edu-card">
       <div class="edu-label">Education</div>
       <div class="edu-degree">Masters in Engineering Data Science</div>
@@ -1463,6 +1619,36 @@ body.modal-open {
       </ul>
     </div>
   </div>
+  <div class="edu-strip-modern minimal">
+    <div class="edu-card">
+      <div class="edu-label">Graduate</div>
+      <div class="edu-degree">MEng Data Science</div>
+      <div class="edu-inst">University of Houston</div>
+      <div class="edu-year">Aug 2024 - May 2026</div>
+      <div class="edu-mini">Focus: machine learning systems, statistics, and applied AI.</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-label">Undergraduate</div>
+      <div class="edu-degree">BSc Hons Computing</div>
+      <div class="edu-inst">NAMI | University of Northampton</div>
+      <div class="edu-year">Aug 2018 - Sept 2021</div>
+      <div class="edu-mini">Focus: software engineering, databases, and AI foundations.</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-label">Postgraduate</div>
+      <div class="edu-degree">Masters in Business Studies</div>
+      <div class="edu-inst">Tribhuwan University</div>
+      <div class="edu-year">Aug 2014 - Sept 2021</div>
+      <div class="edu-mini">Focus: finance, accounting, and strategic business analysis.</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-label">Qualification</div>
+      <div class="edu-degree">Semi-Qualified CA</div>
+      <div class="edu-inst">Institute of CA of Nepal</div>
+      <div class="edu-year">Sept 2015</div>
+      <div class="edu-mini">Focus: audit standards, taxation, and compliance controls.</div>
+    </div>
+  </div>
 </section>
 
 
@@ -1474,7 +1660,7 @@ body.modal-open {
     <div class="sec-kicker">Portfolio · Projects</div>
     <div class="sec-title">Things I've <em>built.</em></div>
     <div class="sec-title-sub">across four industries.</div>
-    <p class="proj-desc">Six end-to-end ML systems spanning FinTech, Energy, Healthcare, and Computer Vision — each rooted in domain depth, each built to be explainable.</p>
+    <p class="proj-desc">Seven end-to-end ML systems spanning FinTech, Energy, Healthcare, and Computer Vision — each rooted in domain depth, each built to be explainable.</p>
     <div class="filters">
       <button class="filter-btn active" data-filter="all">All</button>
       <button class="filter-btn" data-filter="fintech">FinTech</button>
@@ -1580,10 +1766,24 @@ body.modal-open {
       <div class="card-foot"><div class="card-year">2024</div><a href="#" class="card-link">GitHub <span class="card-link-arr">↗</span></a></div>
     </div>
 
+    <div class="card" data-cat="fintech">
+      <div class="card-top"><div class="card-domain">FinTech Â· Cashflow Intelligence</div><div class="card-num">07</div></div>
+      <div class="card-name">Cashflow Intelligence</div>
+      <div class="card-org">Forecasting Â· Explainability Â· Decision Support</div>
+      <div class="card-rule"></div>
+      <div class="card-body">
+        <div><div class="case-label">Problem</div><div class="case-text">Finance teams need <strong>forward-looking cash visibility</strong> with explanations they can trust in executive planning cycles.</div></div>
+        <div><div class="case-label">Approach</div><div class="case-text">Built a cashflow intelligence workflow combining scenario-driven forecasting, feature-level explanations, and operational KPIs.</div></div>
+        <div><div class="case-label">Outcome</div><div class="case-text">Delivered a planning-ready view of expected cash movement, key risk drivers, and actions for short-term optimization.</div></div>
+      </div>
+      <div class="card-skills"><span class="skill-pill">Cashflow Forecasting</span><span class="skill-pill">Scenario Analysis</span><span class="skill-pill">Explainability</span><span class="skill-pill">Finance Analytics</span></div>
+      <div class="card-foot"><div class="card-year">2026</div><a href="#" class="card-link">GitHub <span class="card-link-arr">â†—</span></a></div>
+    </div>
+
   </div>
 
   <div class="proj-bar">
-    <div class="proj-bar-l"><strong>6 projects</strong> · FinTech · Energy · Healthcare · Computer Vision</div>
+    <div class="proj-bar-l"><strong>7 projects</strong> · FinTech · Energy · Healthcare · Computer Vision</div>
     <a href="#" class="proj-bar-r">View all on GitHub <span style="color:#c8a84a;font-size:14px;">↗</span></a>
   </div>
 </section>
@@ -1606,11 +1806,11 @@ body.modal-open {
       <div class="skill-cat-title">Modelling</div>
       <div class="skill-items">
         <div class="skill-item"><span class="skill-name">PyTorch</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:92%"></div></div></div>
-        <div class="skill-item"><span class="skill-name">XGBoost / LightGBM</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:95%"></div></div></div>
-        <div class="skill-item"><span class="skill-name">Scikit-learn</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div></div>
-        <div class="skill-item"><span class="skill-name">HuggingFace</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div></div>
-        <div class="skill-item"><span class="skill-name">PINNs / Physics ML</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:82%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">CNN / Deep Learning</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:88%"></div></div></div>
         <div class="skill-item"><span class="skill-name">Transformers / LSTM</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Hugging Face / Ollama</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">XGBoost / LightGBM</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:95%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">PINNs / Physics ML</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:82%"></div></div></div>
       </div>
     </div>
 
@@ -1621,9 +1821,10 @@ body.modal-open {
         <div class="skill-item"><span class="skill-name">Python</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:95%"></div></div></div>
         <div class="skill-item"><span class="skill-name">Pandas / NumPy</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:93%"></div></div></div>
         <div class="skill-item"><span class="skill-name">SQL</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:88%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Excel / VBA</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Power BI / Tableau</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:86%"></div></div></div>
         <div class="skill-item"><span class="skill-name">Streamlit</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div></div>
-        <div class="skill-item"><span class="skill-name">Tableau</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:82%"></div></div></div>
-        <div class="skill-item"><span class="skill-name">Pydantic / FastAPI</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:75%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Pydantic / FastAPI</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:78%"></div></div></div>
       </div>
     </div>
 
@@ -1632,8 +1833,8 @@ body.modal-open {
       <div class="skill-cat-title">Domain Edge</div>
       <div class="skill-items">
         <div class="skill-item"><span class="skill-name">SHAP / Explainability</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:92%"></div></div></div>
-        <div class="skill-item"><span class="skill-name">SAP S/4HANA FI/CO</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div></div>
         <div class="skill-item"><span class="skill-name">IFRS / Audit</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:95%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Model Governance</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:84%"></div></div></div>
         <div class="skill-item"><span class="skill-name">Probabilistic Methods</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:83%"></div></div></div>
         <div class="skill-item"><span class="skill-name">Git / GitHub</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:88%"></div></div></div>
         <div class="skill-item"><span class="skill-name">Quantile Regression</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div></div>
@@ -1687,7 +1888,7 @@ body.modal-open {
       <div>
         <div class="about-block-label">What I'm working on</div>
         <div class="about-block-title">Right now</div>
-        <div class="about-block-text">SAP S/4HANA FI/CO intensive training (~60 hrs/week) alongside the Intelligent CFO Cash Flow System — building the bridge between enterprise ERP systems and production ML.</div>
+        <div class="about-block-text">Looking for full-time job opportunities in data science and machine learning, while continuing to build production-ready ML systems with strong business impact.</div>
       </div>
       <div>
         <div class="about-block-label">Background</div>
@@ -1811,6 +2012,12 @@ const legacyProjectMeta = [
     tech: "Citation-grounded QA · FastAPI · Chroma",
     cat: "rag",
   },
+  {
+    name: "Cashflow Intelligence",
+    domain: "FinTech · Cashflow Intelligence",
+    tech: "Forecasting · Explainability · Decision Support",
+    cat: "fintech",
+  },
 ];
 
 const projectMeta = Array.isArray(window.INDEX_DATA?.projects)
@@ -1863,6 +2070,9 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && projectModal?.classList.contains("is-open")) {
     closeProjectModal();
   }
+  if (projectModal?.classList.contains("is-open")) return;
+  if (event.key === "ArrowRight") stepProject(1);
+  if (event.key === "ArrowLeft") stepProject(-1);
 });
 
 const teaserCards = document.querySelectorAll(".teaser-card");
@@ -1884,9 +2094,15 @@ cards.forEach((card, i) => {
   card.dataset.cat = p.cat;
   const domain = card.querySelector(".card-domain");
   const name = card.querySelector(".card-name");
+  const org = card.querySelector(".card-org");
+  const num = card.querySelector(".card-num");
   const link = card.querySelector(".card-link");
+  const arrow = card.querySelector(".card-link-arr");
   if (domain) domain.textContent = p.domain;
   if (name) name.textContent = p.name;
+  if (org) org.textContent = p.tech || "";
+  if (num) num.textContent = String(i + 1).padStart(2, "0");
+  if (arrow) arrow.textContent = "->";
   if (link) {
     link.href = "#";
     link.removeAttribute("target");
@@ -1913,18 +2129,101 @@ if (filters) {
   `;
 }
 
-/* filter */
+const projectGrid = document.getElementById("grid");
+let projectPrevBtn = null;
+let projectNextBtn = null;
+let projectCounter = null;
+let projectTag = null;
+let activeFilter = "all";
+let activeProjectIndex = 0;
+
+if (projectGrid) {
+  projectGrid.classList.add("compact-mode");
+  const projectNav = document.createElement("div");
+  projectNav.className = "project-nav";
+  projectNav.innerHTML = `
+    <button type="button" class="project-nav-btn" data-project-nav="prev">Prev</button>
+    <div class="project-counter" data-project-nav="counter">01 / 01</div>
+    <button type="button" class="project-nav-btn" data-project-nav="next">Next</button>
+    <div class="project-tag" data-project-nav="tag">Project</div>
+  `;
+  projectGrid.parentNode.insertBefore(projectNav, projectGrid);
+  projectPrevBtn = projectNav.querySelector('[data-project-nav="prev"]');
+  projectNextBtn = projectNav.querySelector('[data-project-nav="next"]');
+  projectCounter = projectNav.querySelector('[data-project-nav="counter"]');
+  projectTag = projectNav.querySelector('[data-project-nav="tag"]');
+}
+
+function getFilteredCards() {
+  return Array.from(cards).filter((card) => (
+    activeFilter === "all" || card.dataset.cat === activeFilter
+  ));
+}
+
+function renderProjectSpotlight() {
+  const filteredCards = getFilteredCards();
+  cards.forEach((card) => {
+    card.classList.remove("is-active");
+    card.classList.add("hidden");
+  });
+
+  if (!filteredCards.length) {
+    if (projectCounter) projectCounter.textContent = "00 / 00";
+    if (projectTag) projectTag.textContent = "No matching projects";
+    if (projectPrevBtn) projectPrevBtn.disabled = true;
+    if (projectNextBtn) projectNextBtn.disabled = true;
+    return;
+  }
+
+  if (activeProjectIndex >= filteredCards.length) {
+    activeProjectIndex = 0;
+  }
+
+  const currentCard = filteredCards[activeProjectIndex];
+  currentCard.classList.remove("hidden");
+  currentCard.classList.remove("is-active");
+  void currentCard.offsetWidth;
+  currentCard.classList.add("is-active");
+
+  if (projectCounter) {
+    const left = String(activeProjectIndex + 1).padStart(2, "0");
+    const right = String(filteredCards.length).padStart(2, "0");
+    projectCounter.textContent = `${left} / ${right}`;
+  }
+  if (projectTag) {
+    projectTag.textContent = currentCard.querySelector(".card-domain")?.textContent || "Project";
+  }
+  const disableNav = filteredCards.length <= 1;
+  if (projectPrevBtn) projectPrevBtn.disabled = disableNav;
+  if (projectNextBtn) projectNextBtn.disabled = disableNav;
+}
+
+function stepProject(delta) {
+  const filteredCards = getFilteredCards();
+  if (filteredCards.length <= 1) return;
+  activeProjectIndex = (activeProjectIndex + delta + filteredCards.length) % filteredCards.length;
+  renderProjectSpotlight();
+}
+
+if (projectPrevBtn) {
+  projectPrevBtn.addEventListener("click", () => stepProject(-1));
+}
+if (projectNextBtn) {
+  projectNextBtn.addEventListener("click", () => stepProject(1));
+}
+
 const btns = document.querySelectorAll(".filter-btn");
 btns.forEach((btn) => {
   btn.addEventListener("click", () => {
     btns.forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
-    const f = btn.dataset.filter;
-    cards.forEach((card) => {
-      card.classList.toggle("hidden", f !== "all" && card.dataset.cat !== f);
-    });
+    activeFilter = btn.dataset.filter || "all";
+    activeProjectIndex = 0;
+    renderProjectSpotlight();
   });
 });
+
+renderProjectSpotlight();
 
 /* nav active state on scroll */
 const sections = document.querySelectorAll("section[id]");
