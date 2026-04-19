@@ -1,2 +1,8 @@
-Ashish_Adhikari_Resume.pdf
-resume_source_jpm.pdf
+.idea/
+
+# Not required by current index deployment
+*.md
+*.pdf
+main.py
+portfolio_complete.html
+styles.css

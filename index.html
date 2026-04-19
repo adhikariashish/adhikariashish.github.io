@@ -1110,6 +1110,89 @@ footer {
   letter-spacing: 0.12em;
   color: #2a2018;
 }
+
+/* project modal */
+body.modal-open {
+  overflow: hidden;
+}
+.project-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 140;
+  display: none;
+}
+.project-modal.is-open {
+  display: block;
+}
+.project-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 22, 16, 0.55);
+}
+.project-modal-dialog {
+  position: relative;
+  width: min(780px, 92vw);
+  max-height: 86vh;
+  margin: 7vh auto;
+  background: #f8f4ee;
+  border: 1px solid rgba(180, 160, 110, 0.35);
+  border-radius: 14px;
+  box-shadow: 0 20px 56px rgba(71, 52, 25, 0.28);
+  overflow: hidden;
+}
+.project-modal-head {
+  padding: 18px 24px 14px;
+  border-bottom: 1px solid rgba(180, 160, 110, 0.2);
+}
+.project-modal-kicker {
+  font-family: 'Fragment Mono', monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #9a8050;
+  margin-bottom: 8px;
+}
+.project-modal-title {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(24px, 3.6vw, 34px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #1a1610;
+  margin-bottom: 8px;
+}
+.project-modal-tech {
+  font-size: 12px;
+  font-weight: 400;
+  color: #7a7060;
+}
+.project-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(180, 160, 110, 0.35);
+  border-radius: 8px;
+  background: transparent;
+  color: #5a4a30;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+}
+.project-modal-content {
+  padding: 18px 24px 24px;
+  max-height: calc(86vh - 122px);
+  overflow-y: auto;
+}
+.project-modal-content p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #3a3020;
+  margin-bottom: 14px;
+}
+.project-modal-content p:last-child {
+  margin-bottom: 0;
+}
 </style>
 </head>
 <body>
@@ -1676,51 +1759,111 @@ footer {
 
 </div><!-- /site -->
 
+<div id="project-modal" class="project-modal" aria-hidden="true">
+  <div class="project-modal-backdrop" data-close-modal></div>
+  <div class="project-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
+    <button id="project-modal-close" class="project-modal-close" type="button" aria-label="Close" data-close-modal>&times;</button>
+    <div class="project-modal-head">
+      <div id="project-modal-domain" class="project-modal-kicker"></div>
+      <h3 id="project-modal-title" class="project-modal-title"></h3>
+      <div id="project-modal-tech" class="project-modal-tech"></div>
+    </div>
+    <div id="project-modal-content" class="project-modal-content"></div>
+  </div>
+</div>
+
+<script src="./index-data.js"></script>
 <script>
-const projectMeta = [
+const legacyProjectMeta = [
   {
     name: "Hybrid Black-Scholes PINN",
     domain: "FinTech · PINNs",
     tech: "PDE-constrained pricing · PyTorch · Streamlit",
-    file: "./Hybridpinn.md",
     cat: "fintech",
   },
   {
     name: "ERCOT Probabilistic Load Forecasting",
     domain: "Energy · Forecasting",
     tech: "Transformer + physics constraints · 24h uncertainty",
-    file: "./Ercotprobability.md",
     cat: "energy",
   },
   {
     name: "Credit Risk Model",
     domain: "FinTech · Credit",
     tech: "IFRS 9 framing · explainability · model risk",
-    file: "./Creditrisk.md",
     cat: "fintech",
   },
   {
     name: "Hybrid Siamese Change Detection",
     domain: "Computer Vision · Satellite",
     tech: "Siamese UNet++ · Mamba fusion · DefAlign",
-    file: "./change detection.md",
     cat: "cv",
   },
   {
     name: "Real-Time IoT Streaming Dashboard",
     domain: "IoT · Streaming Analytics",
     tech: "MQTT · SQLite · Plotly · Streamlit",
-    file: "./realtimiot.md",
     cat: "iot",
   },
   {
     name: "Enterprise RAG Assistant",
     domain: "Enterprise AI · RAG",
     tech: "Citation-grounded QA · FastAPI · Chroma",
-    file: "./enterpriserag.md",
     cat: "rag",
   },
 ];
+
+const projectMeta = Array.isArray(window.INDEX_DATA?.projects)
+  ? window.INDEX_DATA.projects
+  : legacyProjectMeta;
+
+const projectModal = document.getElementById("project-modal");
+const projectModalTitle = document.getElementById("project-modal-title");
+const projectModalDomain = document.getElementById("project-modal-domain");
+const projectModalTech = document.getElementById("project-modal-tech");
+const projectModalContent = document.getElementById("project-modal-content");
+const projectModalClose = document.getElementById("project-modal-close");
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function openProjectModal(project) {
+  if (!projectModal || !project) return;
+  projectModalTitle.textContent = project.name || "Project";
+  projectModalDomain.textContent = project.domain || "";
+  projectModalTech.textContent = project.tech || "";
+  const details = Array.isArray(project.details) ? project.details : [];
+  projectModalContent.innerHTML = details.length
+    ? details.map((item) => `<p>${escapeHtml(item)}</p>`).join("")
+    : "<p>Project details are coming soon.</p>";
+  projectModal.classList.add("is-open");
+  projectModal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-open");
+  if (projectModalClose) projectModalClose.focus();
+}
+
+function closeProjectModal() {
+  if (!projectModal) return;
+  projectModal.classList.remove("is-open");
+  projectModal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("modal-open");
+}
+
+document.querySelectorAll("[data-close-modal]").forEach((element) => {
+  element.addEventListener("click", closeProjectModal);
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && projectModal?.classList.contains("is-open")) {
+    closeProjectModal();
+  }
+});
 
 const teaserCards = document.querySelectorAll(".teaser-card");
 teaserCards.forEach((card, i) => {
@@ -1745,10 +1888,16 @@ cards.forEach((card, i) => {
   if (domain) domain.textContent = p.domain;
   if (name) name.textContent = p.name;
   if (link) {
-    link.href = p.file;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    link.childNodes[0].textContent = "Open Project ";
+    link.href = "#";
+    link.removeAttribute("target");
+    link.removeAttribute("rel");
+    if (link.childNodes[0]) {
+      link.childNodes[0].textContent = "View Details ";
+    }
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      openProjectModal(p);
+    });
   }
 });
 
