@@ -1,0 +1,1692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ashish Adhikari — Data Scientist & ML Researcher</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,200;1,9..144,300;1,9..144,400;1,9..144,700&family=Instrument+Sans:wght@300;400;500;600&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: #0e0c0a;
+  font-family: 'Instrument Sans', sans-serif;
+  color: #1a1610;
+}
+
+/* ═══════════════════════════════════════
+   SITE WRAPPER
+═══════════════════════════════════════ */
+.site {
+  max-width: 1140px;
+  margin: 0 auto;
+  background: #f8f4ee;
+  min-height: 100vh;
+  position: relative;
+  box-shadow: 0 0 120px rgba(0,0,0,0.6);
+}
+
+/* gold top bar */
+.site::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1140px;
+  height: 3px;
+  background: linear-gradient(90deg, #c8a84a 0%, #e8d090 45%, #b89038 100%);
+  z-index: 100;
+}
+
+/* ═══════════════════════════════════════
+   NAV
+═══════════════════════════════════════ */
+nav {
+  position: sticky;
+  top: 3px;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 44px;
+  height: 62px;
+  background: rgba(248,244,238,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(180,160,110,0.15);
+}
+.nav-mark {
+  font-family: 'Fraunces', serif;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: #1a1610;
+}
+.nav-mark em {
+  font-style: italic;
+  font-weight: 300;
+  color: #c8a84a;
+  font-size: 13px;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.nav-links a {
+  font-size: 11.5px;
+  color: #a09070;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: #1a1610; }
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #c8a84a;
+  box-shadow: 0 0 0 3px rgba(200,168,74,0.15);
+}
+.nav-status {
+  font-family: 'Fragment Mono', monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #9a8050;
+}
+
+/* ═══════════════════════════════════════
+   SHARED UTILS
+═══════════════════════════════════════ */
+.sec-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Fragment Mono', monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #b0a070;
+  margin-bottom: 20px;
+}
+.sec-kicker::before, .sec-kicker::after { content: '——'; color: rgba(180,160,110,0.35); }
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.div-line { width: 48px; height: 1px; background: rgba(180,160,110,0.3); }
+.div-dot  { width: 4px; height: 4px; border-radius: 50%; background: #c8a84a; }
+
+.skill-pill {
+  font-family: 'Fragment Mono', monospace;
+  font-size: 7.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8a7a58;
+  border: 1px solid rgba(180,160,110,0.25);
+  padding: 4px 10px;
+  border-radius: 100px;
+  background: rgba(200,168,74,0.03);
+}
+
+.section-rule {
+  height: 1px;
+  background: rgba(180,160,110,0.15);
+}
+
+
+/* ═══════════════════════════════════════
+   1. HERO
+═══════════════════════════════════════ */
+#hero {
+  text-align: center;
+  padding: 72px 44px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* giant ghost background text */
+.hero-ghost {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Fraunces', serif;
+  font-size: 260px;
+  font-weight: 900;
+  font-style: italic;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(160,135,80,0.06);
+  letter-spacing: -0.06em;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  z-index: 0;
+}
+
+.hero-inner { position: relative; z-index: 2; }
+
+.hero-h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(64px, 9.5vw, 108px);
+  font-weight: 900;
+  color: #1a1610;
+  letter-spacing: -0.045em;
+  line-height: 0.92;
+  margin-bottom: 4px;
+}
+.hero-h1 em {
+  font-style: italic;
+  font-weight: 300;
+  color: #c8a84a;
+}
+.hero-h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(42px, 6vw, 68px);
+  font-weight: 200;
+  font-style: italic;
+  color: #ccc4b0;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+  margin-bottom: 32px;
+}
+
+.hero-divider { margin-bottom: 28px; }
+
+.hero-desc {
+  font-size: 14px;
+  font-weight: 300;
+  color: #7a7060;
+  line-height: 1.85;
+  max-width: 540px;
+  margin: 0 auto 36px;
+}
+.hero-desc strong { font-weight: 500; color: #3a3020; }
+
+.hero-ctas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 60px;
+}
+.btn-ink {
+  font-size: 13px;
+  font-weight: 500;
+  padding: 13px 28px;
+  background: #1a1610;
+  color: #f8f4ee;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  letter-spacing: -0.01em;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+.btn-ghost {
+  font-size: 13px;
+  font-weight: 400;
+  padding: 12px 24px;
+  background: transparent;
+  color: #8a8060;
+  border: 1px solid rgba(180,160,110,0.3);
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-txt {
+  font-family: 'Fragment Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #b0a878;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(176,168,120,0.4);
+}
+
+/* teaser project grid */
+.teaser-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(180,160,110,0.12);
+  border-top: 1px solid rgba(180,160,110,0.15);
+  margin-top: 0;
+}
+.teaser-card {
+  background: #f8f4ee;
+  padding: 24px 24px 20px;
+  cursor: pointer;
+  transition: background 0.2s;
+  position: relative;
+  text-align: left;
+}
+.teaser-card:hover { background: #f0ead8; }
+.teaser-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #c8a84a, transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+.teaser-card:hover::after { transform: scaleX(1); }
+.tc-domain {
+  font-family: 'Fragment Mono', monospace;
+  font-size: 7.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #c8a84a;
+  margin-bottom: 10px;
+}
+.tc-name {
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1610;
+  line-height: 1.2;
+  margin-bottom: 7px;
+  letter-spacing: -0.015em;
+}
+.tc-tech {
+  font-size: 11px;
+  font-weight: 300;
+  color: #9a9080;
+  line-height: 1.55;
+  margin-bottom: 14px;
+}
+.tc-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.tc-num {
+  font-family: 'Fraunces', serif;
+  font-size: 11px;
+  font-weight: 300;
+  font-style: italic;
+  color: #d0c8b4;
+}
+.tc-arr {
+  font-size: 12px;
+  color: #d0c8b4;
+  transition: color 0.2s, transform 0.2s;
+}
+.teaser-card:hover .tc-arr { color: #c8a84a; transform: translate(2px,-2px); }
+
+
+/* ═══════════════════════════════════════
+   2. EXPERIENCE
+═══════════════════════════════════════ */
+#experience {
+  padding-top: 80px;
+}
+.exp-header {
+  text-align: center;
+  padding: 0 44px 48px;
+  border-bottom: 1px solid rgba(180,160,110,0.15);
+}
+.sec-title {
+  font-family: 'Fraunces', serif;
+  font-size: 50px;
+  font-weight: 900;
+  color: #1a1610;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  margin-bottom: 5px;
+}
+.sec-title em { font-style: italic; font-weight: 300; color: #c8a84a; }
+.sec-title-sub {
+  font-family: 'Fraunces', serif;
+  font-size: 30px;
+  font-weight: 200;
+  font-style: italic;
+  color: #d0c8b4;
+  letter-spacing: -0.03em;
+}
+
+.timeline { padding: 0 44px; }
+
+.entry {
+  display: grid;
+  grid-template-columns: 148px 1px 1fr;
+  gap: 0 40px;
+  padding: 52px 0;
+  border-bottom: 1px solid rgba(180,160,110,0.12);
+}
+.entry:last-child { border-bottom: none; }
+
+.entry-left {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  padding-top: 4px;
+}
+.entry-years {
+  font-family: 'Fraunces', serif;
+  font-size: 13px;
+  font-weight: 300;
+  font-style: italic;
+  color: #b0a070;
+  line-height: 1.5;
+}
+.entry-badge {
+  font-family: 'Fragment Mono', monospace;
+  font-size: 7.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #c8a84a;
+  background: rgba(200,168,74,0.08);
+  border: 1px solid rgba(200,168,74,0.2);
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+.entry-loc {
+  font-family: 'Fragment Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  color: #c0b898;
+  font-style: italic;
+}
+
+.spine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.spine-dot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: #f8f4ee;
+  border: 1.5px solid #c8a84a;
+  flex-shrink: 0;
+  margin-top: 5px;
+  z-index: 2;
+}
+.spine-dot.active {
+  background: #c8a84a;
+  box-shadow: 0 0 0 3px rgba(200,168,74,0.15);
+}
+.spine-line {
+  flex: 1;
+  width: 1px;
+  background: rgba(180,160,110,0.2);
+  margin-top: 8px;
+}
+.entry:last-child .spine-line {
+  display: block;
+  flex: none;
+  height: 72px;
+}
+
+.entry-right { padding-top: 0; }
+.entry-role {
+  font-family: 'Fraunces', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1610;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+.entry-org {
+  font-family: 'Fraunces', serif;
+  font-size: 15px;
+  font-weight: 300;
+  font-style: italic;
+  color: #8a7a58;
+  margin-bottom: 18px;
+}
+.entry-desc {
+  font-size: 13px;
+  font-weight: 300;
+  color: #6a6050;
+  line-height: 1.9;
+  max-width: 580px;
+  margin-bottom: 18px;
+  padding-left: 16px;
+  border-left: 2px solid rgba(200,168,74,0.25);
+}
+.entry-desc strong { font-weight: 500; color: #3a3020; }
+.highlights { display: flex; flex-direction: column; gap: 7px; margin-bottom: 20px; }
+.hl {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 12.5px;
+  color: #7a7060;
+  line-height: 1.65;
+}
+.hl::before {
+  content: '';
+  width: 14px; height: 1px;
+  background: #c8a84a;
+  flex-shrink: 0;
+  margin-top: 10px;
+}
+.skill-row { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* edu strip */
+.edu-strip {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  background: #ede7da;
+  border-top: 1px solid rgba(180,160,110,0.15);
+}
+.edu-cell {
+  padding: 28px 32px;
+  border-right: 1px solid rgba(180,160,110,0.15);
+  position: relative;
+}
+.edu-cell:last-child { border-right: none; }
+.edu-cell::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 32px;
+  width: 22px; height: 2px;
+  background: linear-gradient(90deg, #c8a84a, transparent);
+}
+.edu-label {
+  font-family: 'Fragment Mono', monospace;
+  font-size: 7.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #b0a880;
+  margin-top: 10px;
+  margin-bottom: 9px;
+}
+.edu-degree {
+  font-family: 'Fraunces', serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #2a2418;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.edu-inst {
+  font-family: 'Fraunces', serif;
+  font-size: 13px;
+  font-weight: 300;
+  font-style: italic;
+  color: #9a8a68;
+  margin-bottom: 5px;
+}
+.edu-year {
+  font-family: 'Fragment Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  color: #c0b090;
+}
+.edu-strip { display: none; }
+.edu-strip-modern {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  background: #ede7da;
+  border-top: 1px solid rgba(180,160,110,0.15);
+}
+.edu-card {
+  padding: 28px 32px;
+  background: #ede7da;
+  position: relative;
+  border-right: 1px solid rgba(180,160,110,0.15);
+  border-bottom: 1px solid rgba(180,160,110,0.15);
+}
+.edu-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 32px;
+  width: 22px;
+  height: 2px;
+  background: linear-gradient(90deg, #c8a84a, transparent);
+}
+.edu-notes {
+  list-style: none;
+  margin-top: 10px;
+  padding-left: 0;
+  display: block;
+}
+.edu-notes li {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #7a7060;
+  margin-bottom: 6px;
+  position: static;
+  padding-left: 0;
+}
+.edu-card .edu-label {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 9px;
+  font-family: 'Fragment Mono', monospace;
+  font-size: 7.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #b0a880;
+}
+.edu-card .edu-degree {
+  font-family: 'Fraunces', serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #2a2418;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.edu-card .edu-inst {
+  font-family: 'Fraunces', serif;
+  font-size: 13px;
+  font-weight: 300;
+  font-style: italic;
+  color: #9a8a68;
+  margin-bottom: 5px;
+}
+.edu-card .edu-year {
+  font-family: 'Fragment Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  color: #c0b090;
+}
+.edu-notes li::before {
+  content: none;
+}
+@media (max-width: 980px) {
+  .edu-strip-modern { grid-template-columns: 1fr; }
+  .edu-card { border-right: none; }
+}
+
+
+/* ═══════════════════════════════════════
+   3. PROJECTS
+═══════════════════════════════════════ */
+#projects { padding-top: 80px; }
+
+.proj-header {
+  text-align: center;
+  padding: 0 44px 40px;
+  border-bottom: 1px solid rgba(180,160,110,0.15);
+}
+.proj-desc {
+  font-size: 13px;
+  font-weight: 300;
+  color: #8a8070;
+  max-width: 480px;
+  margin: 0 auto 32px;
+  line-height: 1.8;
+}
+.filters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.filter-btn {
+  font-family: 'Fragment Mono', monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 7px 16px;
+  border-radius: 100px;
+  border: 1px solid rgba(180,160,110,0.25);
+  color: #a09070;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.filter-btn:hover { border-color: rgba(200,168,74,0.4); color: #7a6040; background: rgba(200,168,74,0.06); }
+.filter-btn.active { background: #1a1610; color: #f8f4ee; border-color: #1a1610; }
+
+.proj-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 1px;
+  background: rgba(180,160,110,0.12);
+  border-top: 1px solid rgba(180,160,110,0.12);
+}
+.card {
+  background: #f8f4ee;
+  padding: 36px 36px 28px;
+  cursor: pointer;
+  transition: background 0.2s;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.card:hover { background: #f0ead8; }
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #c8a84a 0%, rgba(200,168,74,0.3) 60%, transparent 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+.card:hover::before { transform: scaleX(1); }
+.card.hidden { display: none; }
+.card.wide { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; gap: 44px; }
+
+.card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px; }
+.card-domain {
+  font-family: 'Fragment Mono', monospace;
+  font-size: 7.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #c8a84a;
+}
+.card-num {
+  font-family: 'Fraunces', serif;
+  font-size: 40px;
+  font-weight: 900;
+  font-style: italic;
+  color: rgba(200,168,74,0.1);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.card-name {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1610;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin-bottom: 4px;
+}
+.card-org {
+  font-family: 'Fraunces', serif;
+  font-size: 13.5px;
+  font-weight: 300;
+  font-style: italic;
+  color: #a09070;
+  margin-bottom: 18px;
+}
+.card-rule {
+  width: 28px; height: 1px;
+  background: linear-gradient(90deg, #c8a84a, transparent);
+  margin-bottom: 16px;
+}
+.card-body { display: flex; flex-direction: column; gap: 14px; flex: 1; margin-bottom: 20px; }
+.case-label {
+  font-family: 'Fragment Mono', monospace;
+  font-size: 7.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #c8a84a;
+  margin-bottom: 4px;
+}
+.case-text {
+  font-size: 12.5px;
+  font-weight: 300;
+  color: #6a6050;
+  line-height: 1.75;
+}
+.case-text strong { font-weight: 500; color: #3a3020; }
+.card-skills { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 18px; }
+.card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid rgba(180,160,110,0.15);
+  margin-top: auto;
+}
+.card-year { font-family: 'Fragment Mono', monospace; font-size: 8px; letter-spacing: 0.12em; color: #c0b898; }
+.card-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Fragment Mono', monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #b0a070;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.card-link-arr { font-size: 13px; color: #d0c8b4; transition: transform 0.2s, color 0.2s; }
+.card:hover .card-link { color: #8a6a30; }
+.card:hover .card-link-arr { transform: translate(3px,-3px); color: #c8a84a; }
+
+.proj-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 44px;
+  border-top: 1px solid rgba(180,160,110,0.15);
+  background: #ede7da;
+}
+.proj-bar-l { font-family: 'Fraunces', serif; font-size: 14px; font-weight: 300; font-style: italic; color: #a09070; }
+.proj-bar-l strong { font-weight: 600; font-style: normal; color: #3a3020; }
+.proj-bar-r {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Fragment Mono', monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #a09070;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.proj-bar-r:hover { color: #6a5a30; }
+
+
+/* ═══════════════════════════════════════
+   4. SKILLS
+═══════════════════════════════════════ */
+#skills { padding-top: 80px; }
+.skills-header {
+  text-align: center;
+  padding: 0 44px 52px;
+  border-bottom: 1px solid rgba(180,160,110,0.15);
+}
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 1px;
+  background: rgba(180,160,110,0.12);
+  border-top: 1px solid rgba(180,160,110,0.12);
+}
+.skill-cat {
+  background: #f8f4ee;
+  padding: 32px 32px 28px;
+  position: relative;
+}
+.skill-cat::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 32px;
+  width: 20px; height: 2px;
+  background: linear-gradient(90deg, #c8a84a, transparent);
+}
+.skill-cat-label {
+  font-family: 'Fragment Mono', monospace;
+  font-size: 7.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #c8a84a;
+  margin-top: 8px;
+  margin-bottom: 14px;
+}
+.skill-cat-title {
+  font-family: 'Fraunces', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1610;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+}
+.skill-items {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.skill-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.skill-name {
+  font-size: 12.5px;
+  font-weight: 400;
+  color: #4a4030;
+}
+.skill-bar-wrap {
+  width: 80px;
+  height: 2px;
+  background: rgba(180,160,110,0.15);
+  border-radius: 1px;
+  overflow: hidden;
+}
+.skill-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #c8a84a, #a8882a);
+  border-radius: 1px;
+}
+
+
+/* ═══════════════════════════════════════
+   5. ABOUT
+═══════════════════════════════════════ */
+#about { padding-top: 80px; }
+.about-header {
+  text-align: center;
+  padding: 0 44px 48px;
+  border-bottom: 1px solid rgba(180,160,110,0.15);
+}
+.about-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(180,160,110,0.12);
+  border-top: 1px solid rgba(180,160,110,0.12);
+}
+.about-left {
+  background: #f8f4ee;
+  padding: 48px 44px;
+}
+.about-right {
+  background: #f8f4ee;
+  padding: 48px 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.about-p {
+  font-family: 'Fraunces', serif;
+  font-size: 18px;
+  font-weight: 300;
+  color: #4a4030;
+  line-height: 1.75;
+  margin-bottom: 20px;
+}
+.about-p strong { font-weight: 700; color: #1a1610; }
+.about-p em { font-style: italic; color: #c8a84a; }
+.about-sub {
+  font-size: 13px;
+  font-weight: 300;
+  color: #7a7060;
+  line-height: 1.85;
+}
+.about-block-label {
+  font-family: 'Fragment Mono', monospace;
+  font-size: 7.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #c8a84a;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.about-block-label::before { content: ''; width: 14px; height: 1px; background: #c8a84a; }
+.about-block-title {
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #2a2418;
+  margin-bottom: 10px;
+  letter-spacing: -0.015em;
+}
+.about-block-text {
+  font-size: 12.5px;
+  font-weight: 300;
+  color: #7a7060;
+  line-height: 1.8;
+}
+.interest-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+
+
+/* ═══════════════════════════════════════
+   6. CONTACT
+═══════════════════════════════════════ */
+#contact {
+  padding-top: 80px;
+}
+.contact-inner {
+  text-align: center;
+  padding: 64px 44px 60px;
+  position: relative;
+  overflow: hidden;
+}
+.contact-ghost {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  font-family: 'Fraunces', serif;
+  font-size: 200px;
+  font-weight: 900;
+  font-style: italic;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(160,135,80,0.05);
+  letter-spacing: -0.06em;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+.contact-kicker { margin-bottom: 20px; position: relative; z-index: 2; }
+.contact-h1 {
+  font-family: 'Fraunces', serif;
+  font-size: 52px;
+  font-weight: 900;
+  color: #1a1610;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  margin-bottom: 6px;
+  position: relative; z-index: 2;
+}
+.contact-h1 em { font-style: italic; font-weight: 300; color: #c8a84a; }
+.contact-h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 30px;
+  font-weight: 200;
+  font-style: italic;
+  color: #d0c8b4;
+  letter-spacing: -0.03em;
+  margin-bottom: 32px;
+  position: relative; z-index: 2;
+}
+.contact-divider { margin-bottom: 28px; position: relative; z-index: 2; }
+.contact-desc {
+  font-size: 14px;
+  font-weight: 300;
+  color: #7a7060;
+  line-height: 1.85;
+  max-width: 460px;
+  margin: 0 auto 40px;
+  position: relative; z-index: 2;
+}
+.contact-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+  position: relative; z-index: 2;
+}
+.contact-link-main {
+  font-size: 13px;
+  font-weight: 500;
+  padding: 13px 28px;
+  background: #1a1610;
+  color: #f8f4ee;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.contact-link-out {
+  font-size: 13px;
+  padding: 12px 22px;
+  background: transparent;
+  color: #8a8060;
+  border: 1px solid rgba(180,160,110,0.3);
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+/* social row */
+.social-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  position: relative; z-index: 2;
+}
+.social-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.social-item:hover { opacity: 0.7; }
+.social-label {
+  font-family: 'Fragment Mono', monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #b0a070;
+}
+.social-val {
+  font-family: 'Fraunces', serif;
+  font-size: 14px;
+  font-weight: 300;
+  font-style: italic;
+  color: #3a3020;
+}
+.social-sep {
+  width: 1px; height: 36px;
+  background: rgba(180,160,110,0.2);
+}
+
+/* footer */
+footer {
+  background: #1a1610;
+  padding: 20px 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.foot-mark {
+  font-family: 'Fraunces', serif;
+  font-size: 13px;
+  font-weight: 300;
+  font-style: italic;
+  color: #3a3020;
+}
+.foot-copy {
+  font-family: 'Fragment Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  color: #2a2018;
+}
+</style>
+</head>
+<body>
+<div class="site">
+
+<!-- ────────────────────────
+     NAV
+──────────────────────── -->
+<nav>
+  <div class="nav-mark">Ashish Adhikari <em>· DS</em></div>
+  <div class="nav-links">
+    <a href="#hero">Home</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-right">
+    <div class="nav-dot"></div>
+    <div class="nav-status">Open to roles</div>
+  </div>
+</nav>
+
+
+<!-- ────────────────────────
+     1. HERO
+──────────────────────── -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-ghost">ML</div>
+    <div class="sec-kicker">Data Scientist &amp; ML Researcher · Houston TX</div>
+    <div class="hero-h1">Finance. <em>Rebuilt</em></div>
+    <div class="hero-h2">as Machine Learning.</div>
+    <div class="divider hero-divider">
+      <div class="div-line"></div>
+      <div class="div-dot"></div>
+      <div class="div-line"></div>
+    </div>
+    <p class="hero-desc">
+      A decade of <strong>statutory audit, IFRS reporting, and financial modelling</strong> —
+      now expressed through physics-informed neural networks, probabilistic energy
+      forecasting, and clinical NLP. MEng Data Science, University of Houston.
+    </p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-ink">View Projects →</a>
+      <a href="#" class="btn-ghost">GitHub ↗</a>
+      <button class="btn-txt">Resume ↓</button>
+    </div>
+  </div>
+
+  <!-- teaser grid -->
+  <div class="teaser-grid">
+    <div class="teaser-card">
+      <div class="tc-domain">FinTech · PINNs</div>
+      <div class="tc-name">Black-Scholes Options Pricing</div>
+      <div class="tc-tech">Physics-informed nets · PyTorch · European options</div>
+      <div class="tc-foot"><div class="tc-num">01 / 06</div><div class="tc-arr">↗</div></div>
+    </div>
+    <div class="teaser-card">
+      <div class="tc-domain">Energy · Forecasting</div>
+      <div class="tc-name">ERCOT Probabilistic Load</div>
+      <div class="tc-tech">Transformer + LSTM · Gaussian NLL · Physics constraints</div>
+      <div class="tc-foot"><div class="tc-num">02 / 06</div><div class="tc-arr">↗</div></div>
+    </div>
+    <div class="teaser-card">
+      <div class="tc-domain">FinTech · SAP FI</div>
+      <div class="tc-name">Intelligent CFO System</div>
+      <div class="tc-tech">XGBoost · LightGBM quantile · SHAP · Streamlit</div>
+      <div class="tc-foot"><div class="tc-num">03 / 06</div><div class="tc-arr">↗</div></div>
+    </div>
+    <div class="teaser-card">
+      <div class="tc-domain">Healthcare · NLP</div>
+      <div class="tc-name">Mental Health Classifier</div>
+      <div class="tc-tech">ClinicalBERT · Reddit corpus · Multi-class</div>
+      <div class="tc-foot"><div class="tc-num">04 / 06</div><div class="tc-arr">↗</div></div>
+    </div>
+    <div class="teaser-card">
+      <div class="tc-domain">Computer Vision</div>
+      <div class="tc-name">Satellite Change Detection</div>
+      <div class="tc-tech">CNN · Mamba · Cross-attention fusion</div>
+      <div class="tc-foot"><div class="tc-num">05 / 06</div><div class="tc-arr">↗</div></div>
+    </div>
+    <div class="teaser-card">
+      <div class="tc-domain">FinTech · Credit</div>
+      <div class="tc-name">Credit Risk Model</div>
+      <div class="tc-tech">XGBoost · IFRS 9 · Audit-grade explainability</div>
+      <div class="tc-foot"><div class="tc-num">06 / 06</div><div class="tc-arr">↗</div></div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ────────────────────────
+     2. EXPERIENCE
+──────────────────────── -->
+<section id="experience">
+  <div class="exp-header">
+    <div class="sec-kicker">Career · Experience</div>
+    <div class="sec-title">Where I've <em>been</em></div>
+    <div class="sec-title-sub">shapes what I build.</div>
+  </div>
+
+  <div class="timeline">
+    <div class="entry">
+      <div class="entry-left">
+        <div class="entry-years">2023 —<br>Present</div>
+        <div class="entry-badge">Current</div>
+        <div class="entry-loc">Houston, TX</div>
+      </div>
+      <div class="spine">
+        <div class="spine-dot active"></div>
+        <div class="spine-line"></div>
+      </div>
+      <div class="entry-right">
+        <div class="entry-role">Data Analyst</div>
+        <div class="entry-org">Measurement &amp; Evaluation Center — University of Houston</div>
+        <p class="entry-desc">Building data pipelines and ML-assisted evaluation frameworks for institutional research at scale. Developing <strong>interactive dashboards and analytical systems</strong> to surface insights from complex educational datasets.</p>
+        <div class="highlights">
+          <div class="hl">Designed end-to-end data pipelines for program evaluation across multiple grant-funded initiatives</div>
+          <div class="hl">Built Streamlit dashboards for real-time reporting used by senior institutional stakeholders</div>
+          <div class="hl">Applying ML methods to identify patterns in student performance and intervention outcomes</div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-pill">Python</span>
+          <span class="skill-pill">SQL</span>
+          <span class="skill-pill">Streamlit</span>
+          <span class="skill-pill">Pandas</span>
+          <span class="skill-pill">Tableau</span>
+          <span class="skill-pill">Statistical Modelling</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-left">
+        <div class="entry-years">2012 —<br>2022</div>
+        <div class="entry-badge">Finance</div>
+        <div class="entry-loc">Kathmandu, Nepal</div>
+      </div>
+      <div class="spine">
+        <div class="spine-dot"></div>
+        <div class="spine-line"></div>
+      </div>
+      <div class="entry-right">
+        <div class="entry-role">Audit &amp; Financial Analyst</div>
+        <div class="entry-org">Variant Consulting Group</div>
+        <p class="entry-desc">Delivered end-to-end financial analysis across a <strong>$10M+ annual portfolio</strong> - from P&amp;L and cash flow to internal audit and ERP systems.</p>
+        <div class="highlights">
+          <div class="hl">Analysed P&amp;L statements, balance sheets, and cash flow data through variance, ratio, and trend analysis to support strategic planning and budget decisions.</div>
+          <div class="hl">Built financial reports and Excel dashboards tracking KPIs including revenue growth, expense ratios, and forecasts - improving management visibility for senior stakeholders.</div>
+          <div class="hl">Designed ERP and accounting system enhancements that automated reconciliations and cut month-end close time by 20%.</div>
+          <div class="hl">Conducted internal audits and compliance reviews ensuring accuracy of financial statements against GAAP and regulatory standards.</div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-pill">IFRS</span>
+          <span class="skill-pill">Statutory Audit</span>
+          <span class="skill-pill">Financial Reporting</span>
+          <span class="skill-pill">Internal Controls</span>
+          <span class="skill-pill">Risk Assessment</span>
+          <span class="skill-pill">SAP</span>
+        </div>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-left">
+        <div class="entry-years">Sept 2013 -<br>Jan 2018</div>
+        <div class="entry-badge">Audit</div>
+        <div class="entry-loc">Kathmandu, Nepal</div>
+      </div>
+      <div class="spine">
+        <div class="spine-dot"></div>
+        <div class="spine-line"></div>
+      </div>
+      <div class="entry-right">
+        <div class="entry-role">Audit Trainee -&gt; Audit Manager</div>
+        <div class="entry-org">N Amatya &amp; Co.</div>
+        <p class="entry-desc">Progressed from Audit Trainee to Audit Manager, leading statutory, tax, and risk-based audit engagements across industries.</p>
+        <div class="highlights">
+          <div class="hl">Led statutory and tax audits, ensuring compliance with regulatory standards, GAAP/IFRS, and internal policies.</div>
+          <div class="hl">Directed audit projects and supervised teams, performing risk assessments and strengthening internal controls.</div>
+          <div class="hl">Conducted financial analysis and delivered audit reports with actionable recommendations to senior management.</div>
+          <div class="hl">Advised on tax planning and compliance, collaborating with finance, legal, and operations for comprehensive audit coverage.</div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-pill">GAAP/IFRS</span>
+          <span class="skill-pill">Statutory Audit</span>
+          <span class="skill-pill">Tax Audit</span>
+          <span class="skill-pill">Risk Assessment</span>
+          <span class="skill-pill">Internal Controls</span>
+          <span class="skill-pill">Audit Leadership</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="edu-strip">
+    <div class="edu-cell">
+      <div class="edu-label">Current · Graduate</div>
+      <div class="edu-degree">MEng Data Science</div>
+      <div class="edu-inst">University of Houston</div>
+      <div class="edu-year">2022 — Present</div>
+    </div>
+    <div class="edu-cell">
+      <div class="edu-label">Certification</div>
+      <div class="edu-degree">SAP S/4HANA FI/CO</div>
+      <div class="edu-inst">Intensive Training Program</div>
+      <div class="edu-year">2025</div>
+    </div>
+    <div class="edu-cell">
+      <div class="edu-label">Research Focus</div>
+      <div class="edu-degree">PINNs · RL · GNNs</div>
+      <div class="edu-inst">PhD aligned interest areas</div>
+      <div class="edu-year">Actively exploring</div>
+    </div>
+  </div>
+  <div class="edu-strip-modern">
+    <div class="edu-card">
+      <div class="edu-label">Education</div>
+      <div class="edu-degree">Masters in Engineering Data Science</div>
+      <div class="edu-inst">University of Houston</div>
+      <div class="edu-year">Aug 2024 - May 2026</div>
+      <ul class="edu-notes">
+        <li>Coursework: Probability &amp; Statistics, Data Science, Machine Learning, Database Management, Artificial Intelligence.</li>
+      </ul>
+    </div>
+    <div class="edu-card">
+      <div class="edu-label">Education</div>
+      <div class="edu-degree">BSc Honors in Computing (Software Engineering)</div>
+      <div class="edu-inst">Naaya Aayam Multi-Disciplinary Institute (NAMI) | University of Northampton</div>
+      <div class="edu-year">Aug 2018 - Sept 2021</div>
+      <ul class="edu-notes">
+        <li>Coursework: Computer Architecture, Software Engineering, Database Management, Artificial Intelligence.</li>
+        <li>Dissertation: Payroll System (Web Application) with Intelligent Tax Reduction Suggestion.</li>
+        <li>Major Project: Credit card fraud detection using Deep Learning, Semantic Analysis using a machine learning model.</li>
+      </ul>
+    </div>
+    <div class="edu-card">
+      <div class="edu-label">Education</div>
+      <div class="edu-degree">Masters in Business Studies</div>
+      <div class="edu-inst">Tribhuwan University</div>
+      <div class="edu-year">Aug 2014 - Sept 2021</div>
+      <ul class="edu-notes">
+        <li>Coursework: Accounting, Finance, Cost Management, Taxation, Audit.</li>
+        <li>Thesis: Liquidity and Profitability of Commercial Banks (Three Bank Comparison).</li>
+      </ul>
+    </div>
+    <div class="edu-card">
+      <div class="edu-label">Education</div>
+      <div class="edu-degree">Bachelors in Business Studies</div>
+      <div class="edu-inst">Tribhuwan University</div>
+      <div class="edu-year">Aug 2011 - Sept 2013</div>
+      <ul class="edu-notes">
+        <li>Coursework: Accounting, Finance, Cost Management, Taxation, Audit.</li>
+        <li>Thesis: Liquidity analysis of Agricultural Development Bank.</li>
+      </ul>
+    </div>
+    <div class="edu-card">
+      <div class="edu-label">Professional Qualification</div>
+      <div class="edu-degree">Semi-Qualified Chartered Accountant</div>
+      <div class="edu-inst">Institute of Chartered Accountancy of Nepal (ICAN)</div>
+      <div class="edu-year">Sept 2015</div>
+      <ul class="edu-notes">
+        <li>Coursework: Audit, Accounting Standards, Audit Standards, Taxation, Finance, Cost.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- ────────────────────────
+     3. PROJECTS
+──────────────────────── -->
+<section id="projects" style="padding-top:80px;">
+  <div class="proj-header">
+    <div class="sec-kicker">Portfolio · Projects</div>
+    <div class="sec-title">Things I've <em>built.</em></div>
+    <div class="sec-title-sub">across four industries.</div>
+    <p class="proj-desc">Six end-to-end ML systems spanning FinTech, Energy, Healthcare, and Computer Vision — each rooted in domain depth, each built to be explainable.</p>
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="fintech">FinTech</button>
+      <button class="filter-btn" data-filter="energy">Energy</button>
+      <button class="filter-btn" data-filter="healthcare">Healthcare</button>
+      <button class="filter-btn" data-filter="cv">Computer Vision</button>
+    </div>
+  </div>
+
+  <div class="proj-grid" id="grid">
+
+    <div class="card wide" data-cat="fintech">
+      <div class="card-left">
+        <div class="card-top"><div class="card-domain">FinTech · PINNs</div><div class="card-num">01</div></div>
+        <div class="card-name">PINNs Black-Scholes Options Pricing</div>
+        <div class="card-org">Physics-informed Neural Networks · PyTorch</div>
+        <div class="card-rule"></div>
+        <div class="card-body">
+          <div><div class="case-label">Problem</div><div class="case-text">Classical Black-Scholes solvers ignore <strong>boundary condition violations</strong> common in real market data — mispricing risk in stressed regimes.</div></div>
+          <div><div class="case-label">Approach</div><div class="case-text">Physics-informed neural network embedding the <strong>Black-Scholes PDE directly as a loss term</strong>, forcing the model to respect the governing equation while fitting market observations.</div></div>
+        </div>
+      </div>
+      <div class="card-right" style="display:flex;flex-direction:column;justify-content:space-between;">
+        <div class="card-body">
+          <div><div class="case-label">Outcome</div><div class="case-text">Superior <strong>boundary adherence vs vanilla neural net baselines</strong>. Generalises across strike/maturity grids with physically consistent Greeks.</div></div>
+          <div><div class="case-label">Why it matters</div><div class="case-text">Bridges a decade of IFRS financial modelling with <strong>scientific ML</strong> — a rare cross-disciplinary capability in quantitative finance.</div></div>
+        </div>
+        <div>
+          <div class="card-skills"><span class="skill-pill">PyTorch</span><span class="skill-pill">PINNs</span><span class="skill-pill">Black-Scholes PDE</span><span class="skill-pill">Options Pricing</span><span class="skill-pill">Auto-diff</span></div>
+          <div class="card-foot"><div class="card-year">2024</div><a href="#" class="card-link">GitHub <span class="card-link-arr">↗</span></a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="energy">
+      <div class="card-top"><div class="card-domain">Energy · Forecasting</div><div class="card-num">02</div></div>
+      <div class="card-name">ERCOT Probabilistic Load Forecasting</div>
+      <div class="card-org">Transformer + LSTM · Gaussian NLL</div>
+      <div class="card-rule"></div>
+      <div class="card-body">
+        <div><div class="case-label">Problem</div><div class="case-text">Point forecasts fail to capture <strong>uncertainty during weather extremes</strong> — critical for grid dispatch decisions.</div></div>
+        <div><div class="case-label">Approach</div><div class="case-text">Hybrid <strong>Transformer + LSTM</strong> with Gaussian output head. Physics-informed calendar encodings and sinusoidal time features.</div></div>
+        <div><div class="case-label">Outcome</div><div class="case-text">Calibrated uncertainty intervals with <strong>lower CRPS than deterministic baselines</strong>.</div></div>
+      </div>
+      <div class="card-skills"><span class="skill-pill">PyTorch</span><span class="skill-pill">Transformer</span><span class="skill-pill">LSTM</span><span class="skill-pill">Gaussian NLL</span><span class="skill-pill">Pydantic</span></div>
+      <div class="card-foot"><div class="card-year">2024</div><a href="#" class="card-link">GitHub <span class="card-link-arr">↗</span></a></div>
+    </div>
+
+    <div class="card" data-cat="fintech">
+      <div class="card-top"><div class="card-domain">FinTech · SAP FI/CO</div><div class="card-num">03</div></div>
+      <div class="card-name">Intelligent CFO Cash Flow System</div>
+      <div class="card-org">XGBoost · LightGBM · SHAP · Streamlit</div>
+      <div class="card-rule"></div>
+      <div class="card-body">
+        <div><div class="case-label">Problem</div><div class="case-text">CFOs lack <strong>explainable, forward-looking AR forecasts</strong> — most tools are black-box with no uncertainty quantification.</div></div>
+        <div><div class="case-label">Approach</div><div class="case-text"><strong>XGBoost + LightGBM quantile regression</strong> on SAP FI-structured synthetic data. SHAP explainability layer and Streamlit CFO dashboard.</div></div>
+        <div><div class="case-label">Outcome</div><div class="case-text">End-to-end system from <strong>SAP data ingestion to boardroom-ready dashboard</strong>.</div></div>
+      </div>
+      <div class="card-skills"><span class="skill-pill">XGBoost</span><span class="skill-pill">LightGBM</span><span class="skill-pill">SHAP</span><span class="skill-pill">Streamlit</span><span class="skill-pill">SAP FI/CO</span></div>
+      <div class="card-foot"><div class="card-year">2025</div><a href="#" class="card-link">GitHub <span class="card-link-arr">↗</span></a></div>
+    </div>
+
+    <div class="card" data-cat="healthcare">
+      <div class="card-top"><div class="card-domain">Healthcare · NLP</div><div class="card-num">04</div></div>
+      <div class="card-name">Mental Health NLP Classifier</div>
+      <div class="card-org">ClinicalBERT · Reddit Corpus · Multi-class</div>
+      <div class="card-rule"></div>
+      <div class="card-body">
+        <div><div class="case-label">Problem</div><div class="case-text">Automated triage of mental health disclosures requires <strong>clinical-grade language understanding</strong> — general NLP models miss domain signals.</div></div>
+        <div><div class="case-label">Approach</div><div class="case-text">Fine-tuned <strong>ClinicalBERT</strong> on pre-labeled Reddit mental health subreddit data. Multi-class classification across condition categories.</div></div>
+        <div><div class="case-label">Outcome</div><div class="case-text">Strong F1 across all classes — demonstrates <strong>transfer learning from clinical corpora</strong> to consumer text.</div></div>
+      </div>
+      <div class="card-skills"><span class="skill-pill">ClinicalBERT</span><span class="skill-pill">HuggingFace</span><span class="skill-pill">PyTorch</span><span class="skill-pill">Fine-tuning</span></div>
+      <div class="card-foot"><div class="card-year">2024</div><a href="#" class="card-link">GitHub <span class="card-link-arr">↗</span></a></div>
+    </div>
+
+    <div class="card" data-cat="fintech">
+      <div class="card-top"><div class="card-domain">FinTech · Credit</div><div class="card-num">05</div></div>
+      <div class="card-name">Credit Risk Model</div>
+      <div class="card-org">XGBoost · IFRS 9 · Audit-grade Explainability</div>
+      <div class="card-rule"></div>
+      <div class="card-body">
+        <div><div class="case-label">Problem</div><div class="case-text">IFRS 9 ECL models need to be <strong>both predictive and auditable</strong> — a tension most ML models can't resolve.</div></div>
+        <div><div class="case-label">Approach</div><div class="case-text">XGBoost with SHAP global/local explanations and calibrated probability outputs, framed with <strong>audit trail documentation</strong>.</div></div>
+        <div><div class="case-label">Outcome</div><div class="case-text">Outputs satisfy <strong>both model risk and external audit requirements</strong> — a differentiator few DS candidates can claim.</div></div>
+      </div>
+      <div class="card-skills"><span class="skill-pill">XGBoost</span><span class="skill-pill">SHAP</span><span class="skill-pill">IFRS 9</span><span class="skill-pill">Calibration</span><span class="skill-pill">Model Risk</span></div>
+      <div class="card-foot"><div class="card-year">2024</div><a href="#" class="card-link">GitHub <span class="card-link-arr">↗</span></a></div>
+    </div>
+
+    <div class="card" data-cat="cv">
+      <div class="card-top"><div class="card-domain">Computer Vision · Remote Sensing</div><div class="card-num">06</div></div>
+      <div class="card-name">Satellite Change Detection</div>
+      <div class="card-org">CNN · Mamba · Cross-attention Fusion</div>
+      <div class="card-rule"></div>
+      <div class="card-body">
+        <div><div class="case-label">Problem</div><div class="case-text">Detecting meaningful change in multitemporal satellite imagery requires <strong>long-range temporal dependency modelling</strong> beyond CNNs alone.</div></div>
+        <div><div class="case-label">Approach</div><div class="case-text">Hybrid <strong>CNN + Mamba state-space model</strong> with cross-attention fusion across temporal image pairs.</div></div>
+        <div><div class="case-label">Outcome</div><div class="case-text">Demonstrates <strong>state-space model fluency</strong> and multimodal fusion — signals deep architecture-level ML capability.</div></div>
+      </div>
+      <div class="card-skills"><span class="skill-pill">PyTorch</span><span class="skill-pill">CNN</span><span class="skill-pill">Mamba SSM</span><span class="skill-pill">Cross-attention</span><span class="skill-pill">Remote Sensing</span></div>
+      <div class="card-foot"><div class="card-year">2024</div><a href="#" class="card-link">GitHub <span class="card-link-arr">↗</span></a></div>
+    </div>
+
+  </div>
+
+  <div class="proj-bar">
+    <div class="proj-bar-l"><strong>6 projects</strong> · FinTech · Energy · Healthcare · Computer Vision</div>
+    <a href="#" class="proj-bar-r">View all on GitHub <span style="color:#c8a84a;font-size:14px;">↗</span></a>
+  </div>
+</section>
+
+
+<!-- ────────────────────────
+     4. SKILLS
+──────────────────────── -->
+<section id="skills" style="padding-top:80px;">
+  <div class="skills-header">
+    <div class="sec-kicker">Capabilities · Stack</div>
+    <div class="sec-title">How I <em>build.</em></div>
+    <div class="sec-title-sub">the tools behind the work.</div>
+  </div>
+
+  <div class="skills-grid">
+
+    <div class="skill-cat">
+      <div class="skill-cat-label">ML &amp; Deep Learning</div>
+      <div class="skill-cat-title">Modelling</div>
+      <div class="skill-items">
+        <div class="skill-item"><span class="skill-name">PyTorch</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:92%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">XGBoost / LightGBM</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:95%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Scikit-learn</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">HuggingFace</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">PINNs / Physics ML</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:82%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Transformers / LSTM</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div></div>
+      </div>
+    </div>
+
+    <div class="skill-cat">
+      <div class="skill-cat-label">Data &amp; Engineering</div>
+      <div class="skill-cat-title">Data Stack</div>
+      <div class="skill-items">
+        <div class="skill-item"><span class="skill-name">Python</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:95%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Pandas / NumPy</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:93%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">SQL</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:88%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Streamlit</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Tableau</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:82%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Pydantic / FastAPI</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:75%"></div></div></div>
+      </div>
+    </div>
+
+    <div class="skill-cat">
+      <div class="skill-cat-label">Domain &amp; Explainability</div>
+      <div class="skill-cat-title">Domain Edge</div>
+      <div class="skill-items">
+        <div class="skill-item"><span class="skill-name">SHAP / Explainability</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:92%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">SAP S/4HANA FI/CO</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">IFRS / Audit</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:95%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Probabilistic Methods</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:83%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Git / GitHub</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:88%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Quantile Regression</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ────────────────────────
+     5. ABOUT
+──────────────────────── -->
+<section id="about" style="padding-top:80px;">
+  <div class="about-header">
+    <div class="sec-kicker">Philosophy · Background</div>
+    <div class="sec-title">The person <em>behind</em></div>
+    <div class="sec-title-sub">the models.</div>
+  </div>
+
+  <div class="about-body">
+    <div class="about-left">
+      <p class="about-p">
+        I spent a decade as an auditor — which means I spent a decade asking
+        <em>"how do you know this is true?"</em>
+      </p>
+      <p class="about-p">
+        That instinct for <strong>rigour, explainability, and domain grounding</strong>
+        is what I brought into machine learning. I don't build models that just score well —
+        I build models that can be interrogated, trusted, and deployed in regulated environments.
+      </p>
+      <p class="about-sub">
+        Currently pursuing MEng in Data Science at the University of Houston, working as a Data Analyst
+        at the Measurement &amp; Evaluation Center, and exploring research directions in physics-informed ML,
+        reinforcement learning, and graph neural networks. Open to senior Data Scientist roles in
+        FinTech, Energy/Climate, Healthcare, and AI Products.
+      </p>
+    </div>
+    <div class="about-right">
+      <div>
+        <div class="about-block-label">Research interests</div>
+        <div class="about-block-title">Where I'm headed next</div>
+        <div class="about-block-text">Physics-informed neural networks, neural operators, reinforcement learning for sequential decision-making, and graph neural networks for relational financial data. Actively exploring PhD programs aligned with these areas.</div>
+        <div class="interest-row">
+          <span class="skill-pill">PINNs</span>
+          <span class="skill-pill">Neural Operators</span>
+          <span class="skill-pill">Reinforcement Learning</span>
+          <span class="skill-pill">Graph Neural Networks</span>
+        </div>
+      </div>
+      <div>
+        <div class="about-block-label">What I'm working on</div>
+        <div class="about-block-title">Right now</div>
+        <div class="about-block-text">SAP S/4HANA FI/CO intensive training (~60 hrs/week) alongside the Intelligent CFO Cash Flow System — building the bridge between enterprise ERP systems and production ML.</div>
+      </div>
+      <div>
+        <div class="about-block-label">Background</div>
+        <div class="about-block-title">Nepal → Houston</div>
+        <div class="about-block-text">Began career at Variant Consulting Group in Kathmandu. Worked across banking, manufacturing, and professional services. Moved to Houston to pursue the MEng and pivot into ML.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ────────────────────────
+     6. CONTACT
+──────────────────────── -->
+<section id="contact" style="padding-top:80px;">
+  <div class="section-rule"></div>
+  <div class="contact-inner">
+    <div class="contact-ghost">Hello.</div>
+    <div class="sec-kicker contact-kicker">Let's work together</div>
+    <div class="contact-h1">Open to <em>new</em></div>
+    <div class="contact-h2">opportunities.</div>
+    <div class="divider contact-divider">
+      <div class="div-line"></div>
+      <div class="div-dot"></div>
+      <div class="div-line"></div>
+    </div>
+    <p class="contact-desc">
+      Targeting Data Scientist roles in FinTech, Energy/Climate, Healthcare, and AI Products.
+      Open to full-time positions in Houston or remote. Happy to chat about research collaborations too.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:ashish@email.com" class="contact-link-main">Send an email →</a>
+      <a href="#" class="contact-link-out">LinkedIn ↗</a>
+      <a href="#" class="contact-link-out">GitHub ↗</a>
+    </div>
+    <div class="social-row">
+      <div class="social-item">
+        <div class="social-label">GitHub</div>
+        <div class="social-val">adhikariashish</div>
+      </div>
+      <div class="social-sep"></div>
+      <div class="social-item">
+        <div class="social-label">Location</div>
+        <div class="social-val">Houston, TX</div>
+      </div>
+      <div class="social-sep"></div>
+      <div class="social-item">
+        <div class="social-label">Status</div>
+        <div class="social-val">Open to roles</div>
+      </div>
+      <div class="social-sep"></div>
+      <div class="social-item">
+        <div class="social-label">Response time</div>
+        <div class="social-val">Within 24h</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ────────────────────────
+     FOOTER
+──────────────────────── -->
+<footer>
+  <div class="foot-mark">Ashish Adhikari · Data Scientist</div>
+  <div class="foot-copy">© 2025 · Built with intent · Houston TX</div>
+</footer>
+
+
+</div><!-- /site -->
+
+<script>
+/* filter */
+const btns = document.querySelectorAll('.filter-btn');
+const cards = document.querySelectorAll('.card[data-cat]');
+btns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    btns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    cards.forEach(card => {
+      card.classList.toggle('hidden', f !== 'all' && card.dataset.cat !== f);
+    });
+  });
+});
+
+/* nav active state on scroll */
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.style.color = '');
+      const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+      if (active) active.style.color = '#1a1610';
+    }
+  });
+}, { threshold: 0.3 });
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
