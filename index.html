@@ -910,6 +910,20 @@ nav {
   text-decoration: none;
   transition: color 0.2s;
 }
+.card-link-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.card-link-tab {
+  border: 1px solid rgba(180,160,110,0.28);
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: rgba(200,168,74,0.05);
+  font-size: 7.5px;
+  letter-spacing: 0.1em;
+}
 .card-link-arr { font-size: 13px; color: #d0c8b4; transition: transform 0.2s, color 0.2s; }
 .card:hover .card-link { color: #8a6a30; }
 .card:hover .card-link-arr { transform: translate(3px,-3px); color: #c8a84a; }
@@ -1659,11 +1673,12 @@ body.modal-open {
   <div class="proj-header">
     <div class="sec-kicker">Portfolio · Projects</div>
     <div class="sec-title">Things I've <em>built.</em></div>
-    <div class="sec-title-sub">across four industries.</div>
+    <div class="sec-title-sub">across five industries.</div>
     <p class="proj-desc">Seven end-to-end ML systems spanning FinTech, Energy, Healthcare, and Computer Vision — each rooted in domain depth, each built to be explainable.</p>
     <div class="filters">
       <button class="filter-btn active" data-filter="all">All</button>
       <button class="filter-btn" data-filter="fintech">FinTech</button>
+      <button class="filter-btn" data-filter="healthcare">Healthcare</button>
       <button class="filter-btn" data-filter="energy">Energy</button>
       <button class="filter-btn" data-filter="iot">IoT</button>
       <button class="filter-btn" data-filter="rag">RAG</button>
@@ -1780,6 +1795,19 @@ body.modal-open {
       <div class="card-foot"><div class="card-year">2026</div><a href="#" class="card-link">GitHub <span class="card-link-arr">â†—</span></a></div>
     </div>
 
+    <div class="card" data-cat="rag">
+      <div class="card-top"><div class="card-domain">Enterprise AI | RAG</div><div class="card-num">08</div></div>
+      <div class="card-name">Enterprise RAG Assistant</div>
+      <div class="card-org">Citation-grounded QA | FastAPI | Chroma</div>
+      <div class="card-rule"></div>
+      <div class="card-body">
+        <div><div class="case-label">Problem</div><div class="case-text">Enterprise teams need fast answers from internal docs, but must avoid <strong>hallucinations and unsupported claims</strong>.</div></div>
+        <div><div class="case-label">Approach</div><div class="case-text">Built a retrieval-first RAG pipeline with chunking, embedding search, and response grounding through <strong>citation-backed generation</strong>.</div></div>
+        <div><div class="case-label">Outcome</div><div class="case-text">Delivered consistent, source-referenced answers with clearer trust signals for business users and technical reviewers.</div></div>
+      </div>
+      <div class="card-skills"><span class="skill-pill">RAG</span><span class="skill-pill">FastAPI</span><span class="skill-pill">Chroma</span><span class="skill-pill">Citations</span><span class="skill-pill">Streaming</span></div>
+      <div class="card-foot"><div class="card-year">2025</div><a href="#" class="card-link">GitHub <span class="card-link-arr">↗</span></a></div>
+    </div>
   </div>
 
   <div class="proj-bar">
@@ -2105,13 +2133,52 @@ cards.forEach((card, i) => {
   const num = card.querySelector(".card-num");
   const link = card.querySelector(".card-link");
   const arrow = card.querySelector(".card-link-arr");
+  const caseItems = card.querySelectorAll(".card-body > div");
+  const skillRow = card.querySelector(".card-skills");
   if (domain) domain.textContent = p.domain;
   if (name) name.textContent = p.name;
   if (org) org.textContent = p.tech || "";
   if (num) num.textContent = String(i + 1).padStart(2, "0");
+  if (caseItems.length) {
+    const details = Array.isArray(p.details) ? p.details : [];
+    caseItems.forEach((item, idx) => {
+      const text = item.querySelector(".case-text");
+      if (!text) return;
+      if (idx < details.length) {
+        text.textContent = details[idx];
+        item.style.display = "";
+      } else {
+        item.style.display = "none";
+      }
+    });
+  }
+  if (skillRow && p.tech) {
+    const pills = p.tech
+      .split("|")
+      .map((part) => part.trim())
+      .filter(Boolean)
+      .slice(0, 5);
+    if (pills.length) {
+      skillRow.innerHTML = pills
+        .map((pill) => `<span class="skill-pill">${escapeHtml(pill)}</span>`)
+        .join("");
+    }
+  }
   if (arrow) arrow.textContent = p.github ? "↗" : "->";
+  const customLinks = Array.isArray(p.links)
+    ? p.links.filter((item) => item && item.url && item.label).slice(0, 2)
+    : [];
   if (link) {
-    if (p.github) {
+    if (customLinks.length) {
+      const tabs = document.createElement("div");
+      tabs.className = "card-link-tabs";
+      tabs.innerHTML = customLinks
+        .map((item) => (
+          `<a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer" class="card-link card-link-tab">${escapeHtml(item.label)} <span class="card-link-arr">↗</span></a>`
+        ))
+        .join("");
+      link.replaceWith(tabs);
+    } else if (p.github) {
       link.href = p.github;
       link.target = "_blank";
       link.rel = "noopener noreferrer";
@@ -2142,11 +2209,22 @@ if (filters) {
   filters.innerHTML = `
     <button class="filter-btn active" data-filter="all">All</button>
     <button class="filter-btn" data-filter="fintech">FinTech</button>
+    <button class="filter-btn" data-filter="healthcare">Healthcare</button>
     <button class="filter-btn" data-filter="energy">Energy</button>
     <button class="filter-btn" data-filter="cv">Computer Vision</button>
     <button class="filter-btn" data-filter="iot">IoT</button>
     <button class="filter-btn" data-filter="rag">RAG</button>
   `;
+}
+
+const projectDescription = document.querySelector(".proj-desc");
+if (projectDescription) {
+  projectDescription.textContent = "Eight end-to-end analytics systems spanning FinTech, Healthcare, Supply Chain, Energy, and Computer Vision - each rooted in domain depth, each built to be explainable.";
+}
+
+const projectSummary = document.querySelector(".proj-bar-l");
+if (projectSummary) {
+  projectSummary.innerHTML = "<strong>8 projects</strong> - FinTech - Healthcare - Supply Chain - Energy - Computer Vision";
 }
 
 const projectGrid = document.getElementById("grid");
